@@ -1,3 +1,4 @@
+
 name: CI
 on: [push]
 
@@ -5,20 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Go environment
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.23'
-
-      - name: Install Nuclei via Go
-        run: |
-          go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
-          echo "${HOME}/go/bin" >> $GITHUB_PATH
-
-      - name: Update Nuclei Templates
-        run: nuclei -update-templates
-
-      - name: Run Nuclei Scan
-        run: nuclei -u testphp.vulnweb.com
+    - uses: actions/checkout@v2
+    - name: Run Nuclei
+      uses: projectdiscovery/nuclei-action@main
+      with:
+        target: "testphp.vulnweb.com"
+        flags : "-t /home/runner/nuclei-templates/http/ssl/"

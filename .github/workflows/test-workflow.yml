@@ -11,4 +11,4 @@ jobs:
       uses: projectdiscovery/nuclei-action@main
       with:
         target: "testphp.vulnweb.com"
-        flags: "-all"
+        flags: "-debug"

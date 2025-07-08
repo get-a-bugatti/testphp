@@ -9,4 +9,4 @@ jobs:
     - name: Run Nuclei
       uses: projectdiscovery/nuclei-action@main
       with:
-        target: "http://testphp.vulnweb.com"
+        target: "testphp.vulnweb.com"

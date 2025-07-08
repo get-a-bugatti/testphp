@@ -21,4 +21,4 @@ jobs:
         run: nuclei -update-templates
 
       - name: Run Nuclei Scan
-        run: nuclei -u https://testphp.vulnweb.com
+        run: nuclei -u testphp.vulnweb.com

@@ -6,7 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Run Nuclei
+
+    - name: Run Nuclei with full output
       uses: projectdiscovery/nuclei-action@main
       with:
         target: "testphp.vulnweb.com"
+        args: -all

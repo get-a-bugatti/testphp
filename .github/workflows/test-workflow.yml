@@ -1,36 +1,13 @@
-name: Nuclei
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+name: CI
+on: [push]
 
 jobs:
-  recon:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install Nuclei
-      run: |
-        wget https://github.com/projectdiscovery/nuclei/releases/download/v2.9.8/nuclei_2.9.8_linux_amd64.zip -O nuclei.zip
-        unzip nuclei.zip
-        sudo mv nuclei /usr/local/bin/
-        nuclei --version
-
-    - name: Update Nuclei templates
-      run: |
-        nuclei -update-templates
-
-    - name: Run Nuclei Scan
-      run: |
-        timeout 5h bash -c 'nuclei -u http://testphp.vulnweb.com -es info | tee nuclei-scan-result.txt'
-
-    - name: Upload Scan Results
-      uses: actions/upload-artifact@v4
+    - uses: actions/checkout@v2
+    - name: Run Nuclei
+      uses: projectdiscovery/nuclei-action@main
       with:
-        name: nuclei-scan-results
-        path: nuclei-scan-result.txt
+        target: "testphp.vulnweb.com"
+        flags: "-nmhe"

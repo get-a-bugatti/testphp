@@ -12,4 +12,3 @@ jobs:
       uses: projectdiscovery/nuclei-action@main
       with:
         target: "http://testphp.vulnweb.com"
-        flags: "-t https://cloud.projectdiscovery.io/public/tech-detect"

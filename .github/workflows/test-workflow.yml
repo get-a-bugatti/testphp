@@ -10,5 +10,4 @@ jobs:
     - name: Run Nuclei
       uses: projectdiscovery/nuclei-action@main
       with:
-        target: "testphp.vulnweb.com"
-        flags : "-t /home/runner/nuclei-templates/http/technologies"
+        flags : "-u http://testphp.vulnweb.com -t /home/runner/nuclei-templates/http/technologies"

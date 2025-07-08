@@ -5,10 +5,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Run Nuclei with full output
-      uses: projectdiscovery/nuclei-action@main
-      with:
-        target: "testphp.vulnweb.com"
-        flags: "-debug"
+      - uses: actions/checkout@v2
+      - name: Install Nuclei
+        run: |
+          wget https://github.com/projectdiscovery/nuclei/releases/download/v3.4.7/nuclei_3.4.7_linux_amd64.tar.gz
+          tar -xvzf nuclei_3.4.7_linux_amd64.tar.gz
+          sudo mv nuclei /usr/local/bin/
+      - name: Update Nuclei Templates
+        run: nuclei -update-templates
+      - name: Run Nuclei Scan
+        uses: projectdiscovery/nuclei-action@main
+        with:
+          target: "https://testphp.vulnweb.com"

@@ -5,9 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+    
     - name: Run Nuclei
+      id: nuclei_scan
       uses: projectdiscovery/nuclei-action@main
       with:
-        target: "testphp.vulnweb.com"
+        target: "http://testphp.vulnweb.com"
         flags: "-nmhe"
